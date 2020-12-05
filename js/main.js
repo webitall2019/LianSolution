@@ -79,30 +79,25 @@ for(let i=0; i< desWorLi.length; i++){
     desWorLi[i].setAttribute('title', 'watch');
 };
 function workListToShow(){
-    const designerBlock = document.querySelectorAll('.designer-works__list');
-    const imageToShow = document.querySelectorAll('.designer-works__show img');
-    const subImage = document.querySelectorAll('.designer-works__list img');  
-    let currentSlide = document.querySelector('.slick-active').getAttribute('tabIndex');//current slide
-   
-    let activeSlide = document.querySelector('.slick-active').classList.contains('portfolio-details__slider__item');
-    if(currentSlide == 0 & activeSlide) {
+    if(document.querySelector('.slick-active') && document.querySelector('.slick-active').classList.contains('portfolio-details__slider__item')) {
+    let designerBlock = document.querySelectorAll('.designer-works__list');
+    let imageToShow = document.querySelectorAll('.designer-works__show img');   
         for(let i = 0; i < designerBlock.length; i++){
-            designerBlock[i].addEventListener('click', function(event){
-            let target = event.target;
-            if(target.nodeName == 'LI'){
-                console.log(target);  
-                let newAttr = target.firstElementChild.getAttribute('src');
-                imageToShow[i].setAttribute('srcset', newAttr);
-            }
-         
-        })
-    }
+                designerBlock[i].addEventListener('click', function(event){
+                let target = event.target;
+                if(target.nodeName == 'LI'){ 
+                    console.log('safdsd');
+                    let newAttr = target.firstElementChild.getAttribute('src');
+                    imageToShow[i].setAttribute('srcset', newAttr);
+                }
+            
+            })
+        }
        
     }
     else{
         return false;
     }
-    
     
 }
 workListToShow();
@@ -110,6 +105,14 @@ workListToShow();
 let folioNav = document.querySelectorAll('.portfolio-navigation li');
 for(let i =0; i < folioNav.length; i++){
     folioNav[i].addEventListener('click', function(){
-       swal(" we are sorry, but this option not ready today", "please come back tomorrow","success");
+       swal(" we are sorry, this option unavailable", "please try tomorrow","error");
     })
+}
+const submitButton = document.querySelector('.contact-btn')
+if(submitButton){
+    submitButton.addEventListener('click', 
+    (event)=>{ 
+        event.preventDefault(), 
+        swal(" we are sorry, this option unavailable", "please try tomorrow","error");
+    });
 }
